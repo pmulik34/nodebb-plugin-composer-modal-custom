@@ -91,18 +91,6 @@ plugin.getFormattingOptions = async function () {
 			},
 		],
 	};
-	if (parseInt(meta.config.allowTopicsThumbnail, 10) === 1) {
-		payload.options.push({
-			name: 'thumbs',
-			title: '[[topic:composer.thumb-title]]',
-			className: 'fa fa-address-card-o',
-			badge: true,
-			visibility: {
-				...defaultVisibility,
-				reply: false,
-			},
-		});
-	}
 
 	payload = await plugins.hooks.fire('filter:composer.formatting', payload);
 

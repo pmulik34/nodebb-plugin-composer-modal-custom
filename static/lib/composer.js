@@ -14,7 +14,6 @@ define('composer', [
 	'composer/scheduler',
 	'composer/post-queue',
 	'scrollStop',
-	'topicThumbs',
 	'api',
 	'bootbox',
 	'alerts',
@@ -24,7 +23,7 @@ define('composer', [
 	'screenfull',
 ], function (taskbar, translator, uploads, formatting, drafts, tags,
 	categoryList, preview, resize, autocomplete, scheduler, postQueue, scrollStop,
-	topicThumbs, api, bootbox, alerts, hooks, messagesModule, search, screenfull) {
+	api, bootbox, alerts, hooks, messagesModule, search, screenfull) {
 	var composer = {
 		active: undefined,
 		posts: {},
@@ -844,7 +843,6 @@ define('composer', [
 			var postContainer = $('.composer[data-uuid="' + post_uuid + '"]');
 			postContainer.remove();
 			drafts.removeDraft(postData.save_id);
-			topicThumbs.deleteAll(post_uuid);
 
 			taskbar.discard('composer', post_uuid);
 			$('[data-action="post"]').removeAttr('disabled');
@@ -877,7 +875,7 @@ define('composer', [
 
 	composer.minimizeActive = function () {
 		if (composer.active) {
-			composer.miminize(composer.active);
+			composer.minimize(composer.active);
 		}
 	};
 

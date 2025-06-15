@@ -57,7 +57,9 @@ define('composer/scheduler', ['benchpress', 'bootbox', 'alerts', 'translator'], 
 		submitBtn.defaultText = submitBtn.el.lastChild.textContent;
 		submitBtn.activeText = submitBtn.el.getAttribute('data-text-variant');
 
-		cancelBtn.addEventListener('click', cancelScheduling);
+		if (cancelBtn) {
+			cancelBtn.addEventListener('click', cancelScheduling);
+		}
 		displayBtnCons.forEach(el => el.addEventListener('click', openModal));
 	};
 
@@ -83,9 +85,13 @@ define('composer/scheduler', ['benchpress', 'bootbox', 'alerts', 'translator'], 
 	scheduler.onChangeCategory = function (categoryData) {
 		toggleDisplayButtons(categoryData.privileges['topics:schedule']);
 		toggleItems(false);
-		const optionsVisible = categoryData.privileges['topics:schedule'] || submitOptionsCon.attr('data-submit-options') > 0;
-		submitContainer.find('.composer-submit').toggleClass('rounded-1', !optionsVisible);
-		submitOptionsCon.toggleClass('hidden', !optionsVisible);
+		// Since we removed the dropdown, the submit button should always be rounded
+		submitContainer.find('.composer-submit').addClass('rounded-1');
+		// Only toggle dropdown visibility if it exists
+		if (submitOptionsCon && submitOptionsCon.length) {
+			const optionsVisible = categoryData.privileges['topics:schedule'] || submitOptionsCon.attr('data-submit-options') > 0;
+			submitOptionsCon.toggleClass('hidden', !optionsVisible);
+		}
 		scheduler.reset();
 	};
 
@@ -187,10 +193,14 @@ define('composer/scheduler', ['benchpress', 'bootbox', 'alerts', 'translator'], 
 		}
 		if (dropdownDisplayBtn.el) {
 			dropdownDisplayBtn.el.textContent = active ? dropdownDisplayBtn.activeText : dropdownDisplayBtn.defaultText;
+		}
+		if (cancelBtn) {
 			cancelBtn.classList.toggle('hidden', !active);
 		}
 		// Toggle submit button text
-		submitBtn.el.lastChild.textContent = active ? submitBtn.activeText : submitBtn.defaultText;
+		if (submitBtn.el && submitBtn.el.lastChild) {
+			submitBtn.el.lastChild.textContent = active ? submitBtn.activeText : submitBtn.defaultText;
+		}
 	}
 
 	function toggleDisplayButtons(show) {

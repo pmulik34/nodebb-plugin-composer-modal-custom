@@ -1,8 +1,8 @@
 'use strict';
 
 define('composer/formatting', [
-	'composer/preview', 'composer/resize', 'topicThumbs', 'screenfull',
-], function (preview, resize, topicThumbs, screenfull) {
+	'composer/preview', 'composer/resize', 'screenfull',
+], function (preview, resize, screenfull) {
 	var formatting = {};
 
 	var formattingDispatchTable = {
@@ -18,24 +18,6 @@ define('composer/formatting', [
 			postContainer.find('#files')
 				.attr('accept', '')
 				.click();
-		},
-
-		thumbs: function () {
-			formatting.exitFullscreen();
-			var postContainer = this;
-			require(['composer'], function (composer) {
-				const uuid = postContainer.get(0).getAttribute('data-uuid');
-				const composerObj = composer.posts[uuid];
-
-				if (composerObj.action === 'topics.post' || (composerObj.action === 'posts.edit' && composerObj.isMain)) {
-					topicThumbs.modal.open({ id: uuid, pid: composerObj.pid }).then(() => {
-						postContainer.trigger('thumb.uploaded');	// toggle draft save
-
-						// Update client-side with count
-						composer.updateThumbCount(uuid, postContainer);
-					});
-				}
-			});
 		},
 
 		tags: function () {
