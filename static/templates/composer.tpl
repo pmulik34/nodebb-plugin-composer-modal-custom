@@ -59,7 +59,7 @@
 
 			<div
 				class="{{{ if !template.compose }}}d-none d-md-flex{{{ else }}}d-flex{{{ end }}} action-bar gap-1 align-items-center">
-				<button class="btn btn-sm btn-link composer-discard text-body fw-semibold" data-action="discard"><i
+				<button class="btn btn-sm btn-link composer-discard text-body fw-semibold" data-action="discard" style="margin-top:-0.5rem !important;"><i
 						class="fa fa-trash"></i> <span class="d-none d-md-inline">[[topic:composer.discard]]</button>
 				<div class="btn-group btn-group-sm" component="composer/submit/container">
 					<button
