@@ -94,6 +94,32 @@ plugin.getFormattingOptions = async function () {
 
 	payload = await plugins.hooks.fire('filter:composer.formatting', payload);
 
+	// Debug: Log all available formatting options
+	console.log('Available formatting options:', payload.options && payload.options.map(opt => ({ name: opt.name, title: opt.title, className: opt.className })));
+
+	// Define which formatting options to remove
+	const optionsToRemove = [
+		'Heading', // H button
+		'strikethrough', // S button
+		'code', // Code button
+		'picture', // Image button
+		'quote', // Quote button
+		'upload', // Upload button
+		'emoji', // Emoji button
+		'file', // File button
+		'zen', // Zen mode button
+		'h1', 'h2', 'h3', 'h4', 'h5', 'h6', // Heading alternatives
+		'emoticon', 'smiley', // Emoji alternatives
+	];
+
+	// Filter out unwanted options
+	if (payload && payload.options) {
+		const originalCount = payload.options.length;
+		payload.options = payload.options.filter(option => !optionsToRemove.includes(option.name));
+		console.log(`Removed ${originalCount - payload.options.length} formatting options`);
+		console.log('Remaining options:', payload.options && payload.options.map(opt => opt.name));
+	}
+
 	payload.options.forEach((option) => {
 		option.visibility = {
 			...defaultVisibility,
