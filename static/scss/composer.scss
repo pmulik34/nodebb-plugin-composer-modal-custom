@@ -389,6 +389,15 @@
     border: none !important;
     background-color: #065872 !important;
     font-size: 1rem !important;
-	border-bottom-right-radius: 0px !important;
-    border-top-right-radius: 0px !important;
+	border-radius: 4px 0 0 4px !important;
+}
+
+.submit-options{
+	background-color: #065872 !important;
+    border: none !important;
+}
+.submit-options:hover:active {
+	background-color: #065872 !important;
+    border: none !important;
+	box-shadow: none !important;
 }
