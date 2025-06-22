@@ -49,6 +49,32 @@
 				.category-dropdown-menu {
 					max-height: 300px;
 				}
+				
+				// Hide category icons and colors in dropdown
+				.dropdown-menu {
+					.category-item {
+						.fa, .category-icon, .category-color {
+							display: none !important;
+						}
+					}
+					
+					// Hide any icon elements in category list
+					li a {
+						&:before,
+						.fa,
+						i {
+							display: none !important;
+						}
+					}
+					
+					// Hide colored dots/circles
+					.category-box,
+					.category-badge,
+					[style*="background"],
+					.badge {
+						display: none !important;
+					}
+				}
 			}
 		}
 
@@ -347,6 +373,49 @@
 	}
 }
 
+// Targeted rules to hide only category icons and their spacing
+[component="category-selector"] {
+	// Hide only icon elements in dropdown items, keep text
+	.dropdown-item {
+		// Remove only the circular icon containers
+		span.icon.d-inline-flex.justify-content-center.align-items-center {
+			display: none !important;
+		}
+		
+		// Hide FontAwesome icons specifically
+		.fa,
+		i[class*="fa-"] {
+			display: none !important;
+		}
+		
+		// Remove colored backgrounds from icon containers only
+		span[style*="background-color"] {
+			background: none !important;
+			&.rounded-circle {
+				display: none !important;
+			}
+		}
+	}
+	
+	// Hide icons in the selected category button only
+	.dropdown-toggle {
+		// Target only the icon span, not the text span
+		span.icon.d-inline-flex.justify-content-center.align-items-center {
+			display: none !important;
+		}
+		
+		// Remove gap only between icon and text
+		&.gap-1 {
+			gap: 0 !important;
+		}
+		
+		// Hide only colored circle icons
+		span[style*="background-color"].rounded-circle {
+			display: none !important;
+		}
+	}
+}
+
 @include media-breakpoint-up(md) {
 	// without this formatting elements that are dropdowns are not visible on desktop.
 	// on mobile dropdowns use bottom-sheet and overflow is auto
@@ -401,3 +470,15 @@
     border: none !important;
 	box-shadow: none !important;
 }
+
+// Keep the dropdown functional while hiding only icons
+.composer [component="category-selector"] {
+	// In dropdown menu items, hide only icon elements
+	.dropdown-menu .dropdown-item {
+		.fa,
+		i[class*="fa-"] {
+			display: none !important;
+		}
+	}
+}
+// Hide category icons in the selected category button

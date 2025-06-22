@@ -105,11 +105,9 @@ plugin.getFormattingOptions = async function () {
 		'picture', // Image button
 		'quote', // Quote button
 		'upload', // Upload button
-		'emoji', // Emoji button
 		'file', // File button
 		'zen', // Zen mode button
 		'h1', 'h2', 'h3', 'h4', 'h5', 'h6', // Heading alternatives
-		'emoticon', 'smiley', // Emoji alternatives
 	];
 
 	// Filter out unwanted options
