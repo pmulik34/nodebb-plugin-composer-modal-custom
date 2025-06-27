@@ -104,7 +104,6 @@ plugin.getFormattingOptions = async function () {
 		'code', // Code button
 		'picture', // Image button
 		'quote', // Quote button
-		'upload', // Upload button
 		'file', // File button
 		'zen', // Zen mode button
 		'h1', 'h2', 'h3', 'h4', 'h5', 'h6', // Heading alternatives
